@@ -1,22 +1,26 @@
-﻿namespace TreeC4_5.Data;
+﻿
+using System;
 
-public class Sample
+namespace TreeC4_5.Data
 {
-    public Sign[] Signs { get; }
-    public string Class { get; }
-
-    public Sample(Sign[] signs, string @class)
+    public class Sample
     {
-        Signs = signs;
-        Class = @class;
-    }
+        public Sign[] Signs { get; }
+        public string Class { get; }
 
-    public void Print()
-    {
-        foreach (var sign in Signs)
+        public Sample(Sign[] signs, string @class)
         {
-            Console.Write(sign.Value + " ");
+            Signs = signs;
+            Class = @class;
         }
-        Console.Write(Class);
+
+        public void Print()
+        {
+            foreach (var sign in Signs)
+            {
+                Console.Write(sign.Value + " ");
+            }
+            Console.Write(Class);
+        }
     }
 }

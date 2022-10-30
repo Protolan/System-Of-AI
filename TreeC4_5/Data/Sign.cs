@@ -1,14 +1,17 @@
-﻿namespace TreeC4_5.Data;
+﻿
 
-public class Sign
+namespace TreeC4_5.Data
 {
-    public string Name { get; }
-    public string Value { get; }
-
-    public Sign(string name, string value)
+    public class Sign
     {
-        Name = name;
-        Value = value;
-    }
+        public string Name { get; }
+        public string Value { get; }
+
+        public Sign(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
     
+    }
 }

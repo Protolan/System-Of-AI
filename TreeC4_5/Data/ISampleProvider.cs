@@ -1,6 +1,9 @@
-﻿namespace TreeC4_5.Data;
+﻿
 
-public interface ISampleProvider
+namespace TreeC4_5.Data
 {
-    Sample GetSample();
+    public interface ISampleProvider
+    {
+        Sample GetSample();
+    }
 }
