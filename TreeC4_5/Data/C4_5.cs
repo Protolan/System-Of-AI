@@ -28,19 +28,21 @@
 
         private Tree<string, string>.Node CalculateNode(Sample[] sample, HashSet<string> notInc)
         {
-          
             var nodeName = FindPrioritySign(_samples, notInc);
             var node = new Tree<string, string>.Node();
             if (nodeName == null) return node;
-            // Console.WriteLine(nodeName);
             notInc.Add(nodeName);
             node.Value = nodeName;
             node.Transitions = new List<Tree<string, string>.NodeTransition>();
             foreach (var value in SignsValues[nodeName])
             {
+                // Console.WriteLine($"Start Calculate Node For Sign {nodeName} with value {value}");
+                // foreach (var ni in notInc) 
+                //     Console.Write(ni + " ");
+                // Console.WriteLine();
                 var transition = new Tree<string, string>.NodeTransition();
                 transition.TransitionValue = value;
-                transition.Node = CalculateNode(SamplesWithSignValue(sample, nodeName, value), notInc);
+                transition.Node = CalculateNode(SamplesWithSignValue(sample, nodeName, value), notInc.ToHashSet());
                 node.Transitions.Add(transition);
             }
 

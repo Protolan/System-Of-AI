@@ -26,8 +26,7 @@ public class Tree<T1, T2>
     {
         if(node.Value == null) return;
         string tabulation = string.Concat(Enumerable.Repeat("\t" , spaces));
-        // Console.WriteLine(tabulation + node.Value);
-        Console.WriteLine(node.Transitions.Count);
+        Console.WriteLine(tabulation + node.Value);
         foreach (var nodeTransition in node.Transitions)
         {
             PrintNode(spaces + 1, nodeTransition.Node);
