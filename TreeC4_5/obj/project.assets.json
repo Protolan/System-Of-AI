@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alang\\Desktop\\Учеба\\СИИ\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
+      "projectUniqueName": "C:\\Users\\alang\\Desktop\\Универ\\ИИ\\TreeC4_5\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
       "projectName": "TreeC4_5",
-      "projectPath": "C:\\Users\\alang\\Desktop\\Учеба\\СИИ\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
+      "projectPath": "C:\\Users\\alang\\Desktop\\Универ\\ИИ\\TreeC4_5\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
       "packagesPath": "C:\\Users\\alang\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alang\\Desktop\\Учеба\\СИИ\\System-Of-AI\\TreeC4_5\\obj\\",
+      "outputPath": "C:\\Users\\alang\\Desktop\\Универ\\ИИ\\TreeC4_5\\System-Of-AI\\TreeC4_5\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alang\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -92,7 +92,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -101,7 +102,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\alang\\.dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

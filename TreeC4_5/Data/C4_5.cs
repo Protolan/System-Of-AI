@@ -3,18 +3,75 @@
     public class C4_5
     {
         private readonly Sample[] _samples;
-
-        public C4_5(Sample[] samples) => _samples = samples;
-
-        public void Build()
+        private readonly Dictionary<string, HashSet<string>> SignsValues;
+        public C4_5(Sample[] samples)
         {
-            var root = FindPrioritySign(_samples, new List<string>());
+            _samples = samples;
+            SignsValues = GetSignsValues();
         }
 
-        public Sign FindPrioritySign(Sample[] samples, List<string> notIn) => 
-            samples[0].Signs.Where(p => !notIn.Contains(p.Name)).OrderByDescending(i => GainRation(samples, i.Name)).First();
+        public Tree<string, string> Build()
+        {
+            Console.WriteLine("BeginBuilding");
+            // foreach (var value in SignsValues)
+            // {
+            //     Console.Write(value.Key + ": ");
+            //     foreach (var values in SignsValues[value.Key]) 
+            //         Console.Write(values + ", ");
+            //     Console.WriteLine();
+            // }
+            return new Tree<string, string>
+            {
+                Root = CalculateNode(_samples, new HashSet<string>())
+            };
+        }
 
-        private double Entropy(Sample[] samples)
+        private Tree<string, string>.Node CalculateNode(Sample[] sample, HashSet<string> notInc)
+        {
+          
+            var nodeName = FindPrioritySign(_samples, notInc);
+            var node = new Tree<string, string>.Node();
+            if (nodeName == null) return node;
+            // Console.WriteLine(nodeName);
+            notInc.Add(nodeName);
+            node.Value = nodeName;
+            node.Transitions = new List<Tree<string, string>.NodeTransition>();
+            foreach (var value in SignsValues[nodeName])
+            {
+                var transition = new Tree<string, string>.NodeTransition();
+                transition.TransitionValue = value;
+                transition.Node = CalculateNode(SamplesWithSignValue(sample, nodeName, value), notInc);
+                node.Transitions.Add(transition);
+            }
+
+            return node;
+        }
+
+        private Dictionary<string, HashSet<string>> GetSignsValues()
+        {
+            var allValues = new Dictionary<string, HashSet<string>>();
+            var allSigns = _samples.Select(sa => sa.Signs);
+            foreach (var sign in allSigns)
+            {
+                foreach (var si in sign)
+                {
+                    if (!allValues.ContainsKey(si.Name)) 
+                        allValues.Add(si.Name, new HashSet<string>());
+                    allValues[si.Name].Add(si.Value);
+                }
+            }
+            return allValues;
+        }
+        
+        public string? FindPrioritySign(Sample[] samples, HashSet<string> notIn)
+        {
+            return SignsValues.Keys.Where(si => !notIn.Contains(si)).MaxBy(si => GainRation(samples, si));
+        }
+
+        private static Sample[] SamplesWithSignValue(Sample[] samples, string signName, string signValue) => 
+            samples.Where(sa => sa.Signs.Any(si => si.Name == signName && si.Value == signValue)).ToArray();
+
+        private static double Entropy(Sample[] samples)
         {
             var classes = samples.Select(s => s.Class).Distinct();
             double result = 0;
@@ -26,7 +83,7 @@
             return -result;
         }
 
-        private double ConditionalEntropy(Sample[] samples, string signName)
+        private static double ConditionalEntropy(Sample[] samples, string signName)
         {
             var samplesWithSign = samples.ToDictionary(sa => sa.Signs.First(si => si.Name == signName));
             var signValues = samplesWithSign.Select(s => s.Key.Value).Distinct();
@@ -39,12 +96,11 @@
             }
             return result;
         }
-    
-    
+        
 
-        private double GainRation(Sample[] samples, string signName) => (Entropy(samples) - ConditionalEntropy(samples, signName)) / SplitInfo(samples, signName);
+        private static double GainRation(Sample[] samples, string signName) => (Entropy(samples) - ConditionalEntropy(samples, signName)) / SplitInfo(samples, signName);
 
-        private double SplitInfo(Sample[] samples, string signName)
+        private static double SplitInfo(Sample[] samples, string signName)
         {
             var samplesWithSign = samples.ToDictionary(sa => sa.Signs.First(si => si.Name == signName));
             var signValues = samplesWithSign.Select(s => s.Key.Value).Distinct();

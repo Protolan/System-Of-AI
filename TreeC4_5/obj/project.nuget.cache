@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N/C1Biv8ZZfd5zkGO5pFIL7w0/6G0LXC6/w4sejVP3dAf8VJA4fyRJTRuajZL2o5gyFvt69PnQsEtGqtSMpUHw==",
+  "dgSpecHash": "ZALql1Jx9N6EecLm6nBiknbRUFPnAUKEEUy0KzrsiqEFtnU4fiBJzhrkvarUIvIaUpdGRqgmZdvYB0y/L9ARtQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alang\\Desktop\\Учеба\\СИИ\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
+  "projectFilePath": "C:\\Users\\alang\\Desktop\\Универ\\ИИ\\TreeC4_5\\System-Of-AI\\TreeC4_5\\TreeC4_5.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alang\\.nuget\\packages\\csvhelper\\29.0.0\\csvhelper.29.0.0.nupkg.sha512"
   ],
