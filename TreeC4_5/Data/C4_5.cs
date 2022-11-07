@@ -10,7 +10,7 @@
             SignsValues = GetSignsValues();
         }
 
-        public Tree<string, string> Build()
+        public Tree Build()
         {
             Console.WriteLine("BeginBuilding");
             // foreach (var value in SignsValues)
@@ -20,29 +20,26 @@
             //         Console.Write(values + ", ");
             //     Console.WriteLine();
             // }
-            return new Tree<string, string>
+            return new Tree
             {
                 Root = CalculateNode(_samples, new HashSet<string>())
             };
         }
 
-        private Tree<string, string>.Node CalculateNode(Sample[] sample, HashSet<string> notInc)
+        private Tree.Node CalculateNode(Sample[] sample, HashSet<string> notInc)
         {
             var nodeName = FindPrioritySign(_samples, notInc);
-            var node = new Tree<string, string>.Node();
+            var node = new Tree.Node();
             if (nodeName == null) return node;
             notInc.Add(nodeName);
             node.Value = nodeName;
-            node.Transitions = new List<Tree<string, string>.NodeTransition>();
+            node.Transitions = new List<Tree.NodeTransition>();
             foreach (var value in SignsValues[nodeName])
             {
-                // Console.WriteLine($"Start Calculate Node For Sign {nodeName} with value {value}");
-                // foreach (var ni in notInc) 
-                //     Console.Write(ni + " ");
-                // Console.WriteLine();
-                var transition = new Tree<string, string>.NodeTransition();
+                var transition = new Tree.NodeTransition();
                 transition.TransitionValue = value;
                 transition.Node = CalculateNode(SamplesWithSignValue(sample, nodeName, value), notInc.ToHashSet());
+                // notInc.Add(transition.Node.Value);
                 node.Transitions.Add(transition);
             }
 
